@@ -35,6 +35,31 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
 
+  fonts:
+  - family: DancingScript
+    fonts:
+    - asset: assets/fonts/DancingScript-Bold.ttf
+  - family: Ubuntu
+    fonts:
+    - asset: assets/fonts/Ubuntu-Regular.ttf
+  - family: FlutterIcons
+    fonts:
+    - asset: assets/fonts/FlutterIcons.ttf
+  - family: Poppins
+    fonts:
+    - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+    - asset: assets/fonts/Poppins/Poppins-Medium.ttf
+      weight: 600
+    - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+      weight: 700
+  - family: Circular
+    fonts:
+    - asset: assets/fonts/CircularStd-Medium.ttf
+    - asset: assets/fonts/CircularAir-Light.ttf
+      weight: 100
+    - asset: assets/fonts/CircularStd-Bold.ttf
+      weight: 500
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -44,6 +69,10 @@ flutter:
   # assets:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/google-logo.png
+    - assets/images/facebook-logo.png
+    - assets/images/bg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
