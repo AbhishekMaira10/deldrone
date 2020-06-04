@@ -66,109 +66,116 @@ class _LoginPageState extends State<LoginPage> {
           child: Container(
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
-            child: Column(
+            child: Stack(
               children: <Widget>[
-                SizedBox(
-                  height: 30,
-                ),
-                FadeAnimation(
-                    1,
-                    Text(
-                      "Login",
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                    )),
-                SizedBox(
-                  height: 20,
-                ),
-                FadeAnimation(
-                    1,
-                    Text(
-                      "Login to your account",
-                      style: TextStyle(fontSize: 15, color: Colors.grey[700]),
-                    )),
-                SizedBox(
-                  height: 20,
-                ),
-                FadeAnimation(
-                  1.1,
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Card(
-                      elevation: 10.0,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          mainAxisSize: MainAxisSize.min,
-                          children: _buildChildren(),
-                        ),
-                      ),
+                Opacity(
+                    opacity: 0.5, child: Image.asset('assets/images/bg.png')),
+                Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 30,
                     ),
-                  ),
-                ),
-                FadeAnimation(
-                    1.2,
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40),
-                      child: Container(
-                        padding: EdgeInsets.only(top: 2, left: 3),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border(
-                              bottom: BorderSide(color: Colors.black),
-                              top: BorderSide(color: Colors.black),
-                              left: BorderSide(color: Colors.black),
-                              right: BorderSide(color: Colors.black),
-                            )),
-                        child: MaterialButton(
-                          minWidth: double.infinity,
-                          height: 60,
-                          onPressed: () {},
-                          color: Colors.greenAccent,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          child: Text(
-                            "Login",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 18),
+                    FadeAnimation(
+                        1,
+                        Text(
+                          "Login",
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold),
+                        )),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    FadeAnimation(
+                        1,
+                        Text(
+                          "Login to your account",
+                          style:
+                              TextStyle(fontSize: 15, color: Colors.grey[700]),
+                        )),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    FadeAnimation(
+                      1.1,
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Card(
+                          elevation: 10.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisSize: MainAxisSize.min,
+                              children: _buildChildren(),
+                            ),
                           ),
                         ),
                       ),
-                    )),
-                SizedBox(
-                  height: 20,
-                ),
-                FadeAnimation(
-                  1.3,
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SocialSignInButton(
-                      assetName: 'assets/images/google-logo.png',
-                      text: 'Sign in with Google',
-                      textColor: Colors.black87,
-                      color: Colors.grey[100],
-                      onPressed: () {},
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                FadeAnimation(
-                    1.4,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Don't have an account?"),
-                        Text(
-                          "Sign up",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 18),
+                    FadeAnimation(
+                        1.2,
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 40),
+                          child: Container(
+                            padding: EdgeInsets.only(top: 2, left: 3),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border(
+                                  bottom: BorderSide(color: Colors.black),
+                                  top: BorderSide(color: Colors.black),
+                                  left: BorderSide(color: Colors.black),
+                                  right: BorderSide(color: Colors.black),
+                                )),
+                            child: MaterialButton(
+                              minWidth: double.infinity,
+                              height: 60,
+                              onPressed: () {},
+                              color: Colors.greenAccent,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 18),
+                              ),
+                            ),
+                          ),
+                        )),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    FadeAnimation(
+                      1.3,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SocialSignInButton(
+                          assetName: 'assets/images/google-logo.png',
+                          text: 'Sign in with Google',
+                          textColor: Colors.black87,
+                          color: Colors.grey[100],
+                          onPressed: () {},
                         ),
-                      ],
-                    )),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    FadeAnimation(
+                        1.4,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Don't have an account?"),
+                            Text(
+                              "Sign up",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 18),
+                            ),
+                          ],
+                        )),
+                  ],
+                ),
               ],
             ),
           ),

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "599991438668",
+    "firebase_url": "https://deldrone-customer-app.firebaseio.com",
+    "project_id": "deldrone-customer-app",
+    "storage_bucket": "deldrone-customer-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599991438668:android:ec733f4eaf3878b05793e9",
+        "android_client_info": {
+          "package_name": "com.example.deldrone_customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599991438668-kfm9gnfed687bdjo260mqeap9u98a002.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.deldrone_customer",
+            "certificate_hash": "5a3ed343ec8ed2083408b99f7a0b63387ffc4b6c"
+          }
+        },
+        {
+          "client_id": "599991438668-cpkq10683caj8d83f05vcsce59gkv7u4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCax2XOFymoU8om6C1HE04Oi4lssV5ijUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599991438668-cpkq10683caj8d83f05vcsce59gkv7u4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
