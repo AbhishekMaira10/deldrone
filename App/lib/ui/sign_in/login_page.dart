@@ -1,8 +1,12 @@
 import 'package:deldrone_customer/custom_widgets/animation/FadeAnimation.dart';
-
+import 'package:deldrone_customer/custom_widgets/platform_exception_alert_dialog.dart';
+import 'package:deldrone_customer/services/auth.dart';
+import 'package:deldrone_customer/ui/sign_in/signup_page.dart';
 import 'package:deldrone_customer/ui/sign_in/social_sign_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:deldrone_customer/ui/sign_in/validators.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget with EmailAndPasswordValidators {
   @override
@@ -21,7 +25,30 @@ class _LoginPageState extends State<LoginPage> {
   String get _password => _passwordController.text;
 
   bool _submitted = false;
-  bool _isLoading = false;
+  bool _isLoading1 = false;
+  bool _isLoading2 = false;
+
+  void _showSignInError(BuildContext context, PlatformException exception) {
+    PlatformExceptionAlertDialog(
+      title: 'Sign in failed',
+      exception: exception,
+    ).show(context);
+  }
+
+  Future<void> _signInWithGoogle(BuildContext context) async {
+    try {
+      setState(() => _isLoading1 = true);
+      final auth = Provider.of<AuthBase>(context);
+      await auth.signInWithGoogle();
+      Navigator.of(context).pop();
+    } on PlatformException catch (e) {
+      if (e.code != 'ERROR_ABORTED_BY_USER') {
+        _showSignInError(context, e);
+      }
+    } finally {
+      setState(() => _isLoading1 = false);
+    }
+  }
 
   @override
   void dispose() {
@@ -37,6 +64,27 @@ class _LoginPageState extends State<LoginPage> {
         ? _passwordFocusNode
         : _emailFocusNode;
     FocusScope.of(context).requestFocus(newFocus);
+  }
+
+  void _submit() async {
+    setState(() {
+      _submitted = true;
+      _isLoading2 = true;
+    });
+    try {
+      final auth = Provider.of<AuthBase>(context);
+      await auth.signInWithEmailAndPassword(_email, _password);
+      Navigator.of(context).pop();
+    } on PlatformException catch (e) {
+      PlatformExceptionAlertDialog(
+        title: 'Sign in failed',
+        exception: e,
+      ).show(context);
+    } finally {
+      setState(() {
+        _isLoading2 = false;
+      });
+    }
   }
 
   Future<bool> _onBackPressed(BuildContext context) {
@@ -72,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                     opacity: 0.5, child: Image.asset('assets/images/bg.png')),
                 Column(
                   children: <Widget>[
+                    SizedBox(height: 50.0, child: _buildHeader()),
                     SizedBox(
                       height: 30,
                     ),
@@ -129,7 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: MaterialButton(
                               minWidth: double.infinity,
                               height: 60,
-                              onPressed: () {},
+                              onPressed: _submit,
                               color: Colors.greenAccent,
                               elevation: 0,
                               shape: RoundedRectangleBorder(
@@ -143,7 +192,23 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         )),
                     SizedBox(
-                      height: 20,
+                      height: 15,
+                    ),
+                    FadeAnimation(
+                      1.3,
+                      Center(
+                        child: Text(
+                          'OR',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Circular',
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
                     ),
                     FadeAnimation(
                       1.3,
@@ -154,23 +219,52 @@ class _LoginPageState extends State<LoginPage> {
                           text: 'Sign in with Google',
                           textColor: Colors.black87,
                           color: Colors.grey[100],
-                          onPressed: () {},
+                          onPressed: _isLoading1
+                              ? null
+                              : () => _signInWithGoogle(context),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     FadeAnimation(
                         1.4,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text("Don't have an account?"),
                             Text(
-                              "Sign up",
+                              "Don't have an account?",
                               style: TextStyle(
-                                  fontWeight: FontWeight.w600, fontSize: 18),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Circular',
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SignupPage()));
+                                _emailController.clear();
+                                _passwordController.clear();
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.green[300],
+                                      borderRadius: BorderRadius.circular(15)),
+                                  padding: EdgeInsets.all(10),
+                                  child: Text(
+                                    'Sign Up',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  )),
                             ),
                           ],
                         )),
@@ -205,7 +299,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           hintText: 'test@test.com',
           errorText: showErrorText ? widget.invalidEmailErrorText : null,
-          enabled: _isLoading == false),
+          enabled: _isLoading2 == false),
       autocorrect: false,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
@@ -237,15 +331,25 @@ class _LoginPageState extends State<LoginPage> {
             },
           ),
           errorText: showErrorText ? widget.invalidPasswordErrorText : null,
-          enabled: _isLoading == false),
+          enabled: _isLoading2 == false),
       obscureText: _toggleVisibility,
       textInputAction: TextInputAction.done,
       onChanged: (password) => _updateState(),
-      onEditingComplete: () {},
+      onEditingComplete: _submit,
     );
   }
 
   void _updateState() {
     setState(() {});
+  }
+
+  Widget _buildHeader() {
+    if (_isLoading1) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      return SizedBox(height: 1.0);
+    }
   }
 }

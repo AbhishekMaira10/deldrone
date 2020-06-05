@@ -1,5 +1,7 @@
-import 'package:deldrone_customer/UI/sign_in/sign_in_page.dart';
+import 'package:deldrone_customer/services/auth.dart';
+import 'package:deldrone_customer/ui/sign_in/landing_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //defining entry point of the application
 void main() => runApp(MyApp());
@@ -8,13 +10,16 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'DelDrone',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
+    return Provider<AuthBase>(
+      create: (context) => Auth(),
+      child: MaterialApp(
+        title: 'DelDrone',
+        theme: ThemeData(
+          primarySwatch: Colors.indigo,
+        ),
+        home: LandingPage(),
+        debugShowCheckedModeBanner: false,
       ),
-      home: SignInPage(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
