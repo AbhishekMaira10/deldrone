@@ -49,7 +49,7 @@ class _SignupPageState extends State<SignupPage> {
       _isLoading2 = true;
     });
     try {
-      showLoadingIndicator(context, "Signing In....");
+      showLoadingIndicator(context, "Signing Up....");
       final auth = Provider.of<AuthBase>(context);
       await auth.createUserWithEmailAndPassword(_email, _password);
       Navigator.pushReplacement(context,
