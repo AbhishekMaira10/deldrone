@@ -1,5 +1,6 @@
 import 'package:deldrone_customer/custom_widgets/platform_alert_dialog.dart';
 import 'package:deldrone_customer/services/auth.dart';
+import 'package:deldrone_customer/ui/sign_in/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +9,8 @@ class HomePage extends StatelessWidget {
     try {
       final auth = Provider.of<AuthBase>(context);
       await auth.signOut();
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) => SignInPage()));
     } catch (e) {
       print(e.toString());
     }

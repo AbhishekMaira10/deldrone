@@ -1,6 +1,8 @@
 import 'package:deldrone_customer/custom_widgets/animation/FadeAnimation.dart';
+import 'package:deldrone_customer/custom_widgets/loading_indicator.dart';
 import 'package:deldrone_customer/custom_widgets/platform_exception_alert_dialog.dart';
 import 'package:deldrone_customer/services/auth.dart';
+import 'package:deldrone_customer/ui/home/home_page.dart';
 import 'package:deldrone_customer/ui/sign_in/signup_page.dart';
 import 'package:deldrone_customer/ui/sign_in/social_sign_in_button.dart';
 import 'package:flutter/material.dart';
@@ -39,8 +41,10 @@ class _LoginPageState extends State<LoginPage> {
     try {
       setState(() => _isLoading1 = true);
       final auth = Provider.of<AuthBase>(context);
+      showLoadingIndicator(context, "Signing In....");
       await auth.signInWithGoogle();
-      Navigator.of(context).pop();
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => HomePage()));
     } on PlatformException catch (e) {
       if (e.code != 'ERROR_ABORTED_BY_USER') {
         _showSignInError(context, e);
@@ -72,9 +76,11 @@ class _LoginPageState extends State<LoginPage> {
       _isLoading2 = true;
     });
     try {
+      showLoadingIndicator(context, "Signing In....");
       final auth = Provider.of<AuthBase>(context);
       await auth.signInWithEmailAndPassword(_email, _password);
-      Navigator.of(context).pop();
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => HomePage()));
     } on PlatformException catch (e) {
       PlatformExceptionAlertDialog(
         title: 'Sign in failed',
@@ -120,7 +126,6 @@ class _LoginPageState extends State<LoginPage> {
                     opacity: 0.5, child: Image.asset('assets/images/bg.png')),
                 Column(
                   children: <Widget>[
-                    SizedBox(height: 50.0, child: _buildHeader()),
                     SizedBox(
                       height: 30,
                     ),
@@ -341,15 +346,5 @@ class _LoginPageState extends State<LoginPage> {
 
   void _updateState() {
     setState(() {});
-  }
-
-  Widget _buildHeader() {
-    if (_isLoading1) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    } else {
-      return SizedBox(height: 1.0);
-    }
   }
 }
