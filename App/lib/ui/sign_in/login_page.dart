@@ -1,6 +1,6 @@
+import 'package:deldrone_customer/custom_widgets/alerts/loading_indicator.dart';
+import 'package:deldrone_customer/custom_widgets/alerts/platform_exception_alert_dialog.dart';
 import 'package:deldrone_customer/custom_widgets/animation/FadeAnimation.dart';
-import 'package:deldrone_customer/custom_widgets/loading_indicator.dart';
-import 'package:deldrone_customer/custom_widgets/platform_exception_alert_dialog.dart';
 import 'package:deldrone_customer/services/auth.dart';
 import 'package:deldrone_customer/ui/home/home_page.dart';
 import 'package:deldrone_customer/ui/sign_in/signup_page.dart';

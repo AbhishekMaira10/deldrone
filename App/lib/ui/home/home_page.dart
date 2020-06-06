@@ -1,10 +1,16 @@
-import 'package:deldrone_customer/custom_widgets/platform_alert_dialog.dart';
+import 'package:deldrone_customer/custom_widgets/alerts/platform_alert_dialog.dart';
+import 'package:deldrone_customer/custom_widgets/custom_text.dart';
 import 'package:deldrone_customer/services/auth.dart';
 import 'package:deldrone_customer/ui/sign_in/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   Future<void> _signOut(BuildContext context) async {
     try {
       final auth = Provider.of<AuthBase>(context);
@@ -28,24 +34,105 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  Future<bool> _onBackPressed(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text("Do you really want to exit?"),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () => Navigator.pop(context, false),
+                  child: Text("No"),
+                ),
+                FlatButton(
+                  onPressed: () => Navigator.pop(context, true),
+                  child: Text("Yes"),
+                )
+              ],
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Page'),
-        actions: <Widget>[
-          FlatButton(
-            child: Text(
-              'Logout',
-              style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.white,
+    return WillPopScope(
+      child: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: <Widget>[
+              Opacity(opacity: 0.6, child: Image.asset('assets/images/bg.png')),
+              ListView(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomText(
+                            text: 'What would you like to eat?',
+                            size: 18,
+                            family: 'Circular',
+                            weight: FontWeight.bold),
+                      ),
+                      Stack(
+                        children: <Widget>[
+                          IconButton(
+                              icon: Icon(Icons.notifications_none),
+                              onPressed: () {}),
+                          Positioned(
+                            top: 12,
+                            right: 12,
+                            child: Container(
+                              height: 10,
+                              width: 10,
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey[300],
+                            offset: Offset(1, 1),
+                            blurRadius: 4,
+                          ),
+                        ],
+                      ),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.search,
+                          color: Colors.red,
+                        ),
+                        title: TextField(
+                            decoration: InputDecoration(
+                          hintText: 'Find Food and Restraunts',
+                          border: InputBorder.none,
+                        )),
+                        trailing: Icon(
+                          Icons.filter_list,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-            ),
-            onPressed: () => _confirmSignOut(context),
+            ],
           ),
-        ],
+        ),
       ),
+      onWillPop: () => _onBackPressed(context),
     );
   }
 }

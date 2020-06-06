@@ -1,4 +1,4 @@
-import 'package:deldrone_customer/custom_widgets/platform_alert_dialog.dart';
+import 'package:deldrone_customer/custom_widgets/alerts/platform_alert_dialog.dart';
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 

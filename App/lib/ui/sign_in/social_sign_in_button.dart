@@ -1,4 +1,4 @@
-import 'package:deldrone_customer/custom_widgets/custom_raised_button.dart';
+import 'package:deldrone_customer/custom_widgets/buttons/custom_raised_button.dart';
 import 'package:flutter/material.dart';
 
 class SocialSignInButton extends CustomRaisedButton {

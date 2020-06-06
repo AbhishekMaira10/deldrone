@@ -54,7 +54,7 @@ class SignInPage extends StatelessWidget {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(
-                                    'assets/images/Illustration.png'))),
+                                    'assets/images/illustration.png'))),
                       )),
                   Column(
                     children: <Widget>[
