@@ -1,6 +1,7 @@
 import 'package:deldrone_customer/custom_widgets/alerts/platform_alert_dialog.dart';
 import 'package:deldrone_customer/custom_widgets/custom_text.dart';
 import 'package:deldrone_customer/custom_widgets/ui_widgets/categories.dart';
+import 'package:deldrone_customer/custom_widgets/ui_widgets/featured_products.dart';
 import 'package:deldrone_customer/services/auth.dart';
 import 'package:deldrone_customer/ui/sign_in/sign_in_page.dart';
 import 'package:flutter/material.dart';
@@ -129,6 +130,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 10),
                   Categories(),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CustomText(
+                        text: "Featured", size: 20, color: Colors.grey),
+                  ),
+                  Featured(),
                 ],
               ),
             ],
