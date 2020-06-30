@@ -1,11 +1,7 @@
-import 'package:deldrone_customer/custom_widgets/alerts/platform_alert_dialog.dart';
 import 'package:deldrone_customer/custom_widgets/custom_text.dart';
 import 'package:deldrone_customer/custom_widgets/ui_widgets/categories.dart';
 import 'package:deldrone_customer/custom_widgets/ui_widgets/featured_products.dart';
-import 'package:deldrone_customer/services/auth.dart';
-import 'package:deldrone_customer/ui/sign_in/sign_in_page.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,29 +9,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<void> _signOut(BuildContext context) async {
-    try {
-      final auth = Provider.of<AuthBase>(context);
-      await auth.signOut();
-      Navigator.push(context,
-          MaterialPageRoute(builder: (BuildContext context) => SignInPage()));
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
-  Future<void> _confirmSignOut(BuildContext context) async {
-    final didRequestSignOut = await PlatformAlertDialog(
-      title: 'Logout',
-      content: 'Are you sure that you want to logout?',
-      cancelActionText: 'Cancel',
-      defaultActionText: 'Logout',
-    ).show(context);
-    if (didRequestSignOut == true) {
-      _signOut(context);
-    }
-  }
-
   Future<bool> _onBackPressed(BuildContext context) {
     return showDialog(
         context: context,
@@ -93,24 +66,6 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: GestureDetector(
-                          onTap: () => _confirmSignOut,
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.redAccent,
-                                  borderRadius: BorderRadius.circular(20)),
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                'Logout',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                        ),
                       ),
                     ],
                   ),

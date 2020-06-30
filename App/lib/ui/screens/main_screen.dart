@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
     orderPage = OrderPage();
     favoritePage = FavoritePage();
     profilePage = ProfilePage();
-    pages = [homePage, favoritePage, orderPage, profilePage];
+    pages = [homePage, orderPage, favoritePage, profilePage];
 
     currentPage = homePage;
     super.initState();
