@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       child: Scaffold(
-        body: SafeArea(
+        body: Container(
           child: Stack(
             children: <Widget>[
               Opacity(opacity: 0.6, child: Image.asset('assets/images/bg.png')),
@@ -93,6 +93,24 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: GestureDetector(
+                          onTap: () => _confirmSignOut,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.redAccent,
+                                  borderRadius: BorderRadius.circular(20)),
+                              padding: EdgeInsets.all(10),
+                              child: Text(
+                                'Logout',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                        ),
                       ),
                     ],
                   ),
@@ -130,7 +148,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 10),
                   Categories(),
-                  SizedBox(height: 5),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomText(
