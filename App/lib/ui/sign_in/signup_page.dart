@@ -2,7 +2,7 @@ import 'package:deldrone_customer/custom_widgets/alerts/loading_indicator.dart';
 import 'package:deldrone_customer/custom_widgets/alerts/platform_exception_alert_dialog.dart';
 import 'package:deldrone_customer/custom_widgets/animation/FadeAnimation.dart';
 import 'package:deldrone_customer/services/auth.dart';
-import 'package:deldrone_customer/ui/home/home_page.dart';
+import 'package:deldrone_customer/ui/Pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:deldrone_customer/ui/sign_in/validators.dart';
 import 'package:flutter/services.dart';

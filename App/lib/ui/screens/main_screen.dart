@@ -1,7 +1,10 @@
+import 'package:deldrone_customer/ui/Pages/favorite_page.dart';
+import 'package:deldrone_customer/ui/Pages/order_page.dart';
+import 'package:deldrone_customer/ui/Pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 //Pages
-import 'package:deldrone_customer/ui/home/home_page.dart';
+import 'package:deldrone_customer/ui/Pages/home_page.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -13,16 +16,22 @@ class _MainScreenState extends State<MainScreen> {
   Widget currentPage;
 
   HomePage homePage;
+  OrderPage orderPage;
+  FavoritePage favoritePage;
+  ProfilePage profilePage;
 
   List<Widget> pages;
 
   @override
   void initState() {
-    super.initState();
     homePage = HomePage();
-    pages = [homePage];
+    orderPage = OrderPage();
+    favoritePage = FavoritePage();
+    profilePage = ProfilePage();
+    pages = [homePage, favoritePage, orderPage, profilePage];
 
     currentPage = homePage;
+    super.initState();
   }
 
   @override
