@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:deldrone_customer/ui/sign_in/validators.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:deldrone_customer/custom_widgets/alerts/back_pressed.dart';
 
 class LoginPage extends StatefulWidget with EmailAndPasswordValidators {
   @override
@@ -93,28 +94,10 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Future<bool> _onBackPressed(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text("Do you really want to exit?"),
-              actions: <Widget>[
-                FlatButton(
-                  onPressed: () => Navigator.pop(context, false),
-                  child: Text("No"),
-                ),
-                FlatButton(
-                  onPressed: () => Navigator.pop(context, true),
-                  child: Text("Yes"),
-                )
-              ],
-            ));
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => _onBackPressed(context),
+      onWillPop: () => onBackPressed(context),
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(

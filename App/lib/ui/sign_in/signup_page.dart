@@ -1,6 +1,7 @@
 import 'package:deldrone_customer/custom_widgets/alerts/loading_indicator.dart';
 import 'package:deldrone_customer/custom_widgets/alerts/platform_exception_alert_dialog.dart';
 import 'package:deldrone_customer/custom_widgets/animation/FadeAnimation.dart';
+import 'package:deldrone_customer/custom_widgets/alerts/back_pressed.dart';
 import 'package:deldrone_customer/services/auth.dart';
 import 'package:deldrone_customer/ui/Pages/home_page.dart';
 import 'package:flutter/material.dart';
@@ -66,28 +67,10 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
-  Future<bool> _onBackPressed(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text("Do you really want to exit?"),
-              actions: <Widget>[
-                FlatButton(
-                  onPressed: () => Navigator.pop(context, false),
-                  child: Text("No"),
-                ),
-                FlatButton(
-                  onPressed: () => Navigator.pop(context, true),
-                  child: Text("Yes"),
-                )
-              ],
-            ));
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => _onBackPressed(context),
+      onWillPop: () => onBackPressed(context),
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(

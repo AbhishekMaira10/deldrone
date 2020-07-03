@@ -67,21 +67,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontFamily: 'Ubuntu',
                           ),
                         ),
-                        FlatButton(
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.redAccent,
-                                  borderRadius: BorderRadius.circular(20)),
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                'Logout',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              )),
+                        SmallButton(
+                          btnText: 'Logout',
                           onPressed: () => _confirmSignOut(context),
-                        ),
+                          borderRadius: 20.0,
+                          color: Colors.redAccent,
+                        )
                       ],
                     ),
                     SizedBox(
@@ -132,7 +123,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             SizedBox(
                               height: 20.0,
                             ),
-                            SmallButton(btnText: "Edit"),
+                            SmallButton(
+                              btnText: 'Edit',
+                              onPressed: () {},
+                              borderRadius: 10.0,
+                              color: Colors.blue,
+                            ),
                           ],
                         ),
                       ],
