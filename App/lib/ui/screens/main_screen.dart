@@ -1,10 +1,10 @@
-import 'package:deldrone_customer/ui/Pages/favorite_page.dart';
-import 'package:deldrone_customer/ui/Pages/order_page.dart';
-import 'package:deldrone_customer/ui/Pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 //Pages
 import 'package:deldrone_customer/ui/Pages/home_page.dart';
+import 'package:deldrone_customer/ui/Pages/explore_page.dart';
+import 'package:deldrone_customer/ui/Pages/order_page.dart';
+import 'package:deldrone_customer/ui/Pages/profile_page.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
 
   HomePage homePage;
   OrderPage orderPage;
-  FavoritePage favoritePage;
+  ExplorePage explorePage;
   ProfilePage profilePage;
 
   List<Widget> pages;
@@ -26,9 +26,9 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     homePage = HomePage();
     orderPage = OrderPage();
-    favoritePage = FavoritePage();
+    explorePage = ExplorePage();
     profilePage = ProfilePage();
-    pages = [homePage, orderPage, favoritePage, profilePage];
+    pages = [homePage, explorePage, orderPage, profilePage];
 
     currentPage = homePage;
     super.initState();
@@ -52,12 +52,12 @@ class _MainScreenState extends State<MainScreen> {
             title: Text("Home"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            title: Text("Orders"),
+            icon: Icon(Icons.explore),
+            title: Text("Explore"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            title: Text("Favorites"),
+            icon: Icon(Icons.shopping_cart),
+            title: Text("Orders"),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

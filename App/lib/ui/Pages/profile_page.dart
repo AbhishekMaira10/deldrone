@@ -1,4 +1,5 @@
 import 'package:deldrone_customer/custom_widgets/alerts/platform_alert_dialog.dart';
+import 'package:deldrone_customer/custom_widgets/alerts/back_pressed.dart';
 import 'package:deldrone_customer/custom_widgets/buttons/small_button.dart';
 import 'package:deldrone_customer/custom_widgets/custom_list_tile.dart';
 import 'package:deldrone_customer/services/auth.dart';
@@ -38,28 +39,10 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  Future<bool> _onBackPressed(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text("Do you really want to exit?"),
-              actions: <Widget>[
-                FlatButton(
-                  onPressed: () => Navigator.pop(context, false),
-                  child: Text("No"),
-                ),
-                FlatButton(
-                  onPressed: () => Navigator.pop(context, true),
-                  child: Text("Yes"),
-                )
-              ],
-            ));
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => _onBackPressed(context),
+      onWillPop: () => onBackPressed(context),
       child: Scaffold(
         body: Stack(
           children: <Widget>[
