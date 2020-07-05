@@ -1,3 +1,4 @@
+import 'package:deldrone_customer/custom_widgets/buttons/custom_raised_button.dart';
 import 'package:deldrone_customer/custom_widgets/custom_text.dart';
 import 'package:deldrone_customer/custom_widgets/ui_widgets/order_card.dart';
 import 'package:flutter/material.dart';
@@ -122,25 +123,20 @@ class _OrderPageState extends State<OrderPage> {
           SizedBox(
             height: 20.0,
           ),
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: 50.0,
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(35.0),
-              ),
-              child: Center(
-                child: Text(
-                  "Proceed To Checkout",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+          CustomRaisedButton(
+            borderRadius: 35,
+            childs: Center(
+              child: Text(
+                "Proceed To Checkout",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
+            onPressed: () {},
+            color: Colors.blue,
           ),
           SizedBox(
             height: 20.0,

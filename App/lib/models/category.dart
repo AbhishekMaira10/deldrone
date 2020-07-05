@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-
 class Category {
-  final String name;
-  final String image;
+  final String categoryName;
+  final String imagePath;
+  final int numberOfItems;
 
-  Category({@required this.name, @required this.image});
-  
+  Category({this.categoryName, this.imagePath, this.numberOfItems});
 }

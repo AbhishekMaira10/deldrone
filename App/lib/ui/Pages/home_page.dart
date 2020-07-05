@@ -1,7 +1,7 @@
 import 'package:deldrone_customer/custom_widgets/custom_text.dart';
 import 'package:deldrone_customer/custom_widgets/alerts/back_pressed.dart';
-import 'package:deldrone_customer/custom_widgets/ui_widgets/categories.dart';
 import 'package:deldrone_customer/custom_widgets/ui_widgets/featured_products.dart';
+import 'package:deldrone_customer/custom_widgets/ui_widgets/food_category.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Categories(),
+                  FoodCategory(),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomText(
