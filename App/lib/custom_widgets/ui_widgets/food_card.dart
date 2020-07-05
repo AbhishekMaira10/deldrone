@@ -13,7 +13,7 @@ class FoodCard extends StatelessWidget {
       margin: EdgeInsets.only(right: 20.0),
       child: Card(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
           child: Row(
             children: <Widget>[
               Image(
