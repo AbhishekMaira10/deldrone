@@ -122,7 +122,6 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 15),
                   Column(
                     children: _foods.map(_buildFoodItems).toList(),
                   )
