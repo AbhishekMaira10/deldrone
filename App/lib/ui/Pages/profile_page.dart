@@ -2,7 +2,7 @@ import 'package:deldrone_customer/custom_widgets/alerts/platform_alert_dialog.da
 import 'package:deldrone_customer/custom_widgets/alerts/back_pressed.dart';
 import 'package:deldrone_customer/custom_widgets/buttons/small_button.dart';
 import 'package:deldrone_customer/custom_widgets/custom_list_tile.dart';
-import 'package:deldrone_customer/services/auth.dart';
+import 'package:deldrone_customer/providers/auth.dart';
 import 'package:deldrone_customer/ui/sign_in/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,8 +18,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> _signOut(BuildContext context) async {
     try {
-      final auth = Provider.of<AuthBase>(context);
-      await auth.signOut();
+      final authProvider = Provider.of<AuthProvider>(context);
+      await authProvider.signOut();
       Navigator.push(context,
           MaterialPageRoute(builder: (BuildContext context) => SignInPage()));
     } catch (e) {

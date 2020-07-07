@@ -1,70 +1,78 @@
-import 'package:deldrone_customer/custom_widgets/alerts/loading_indicator.dart';
 import 'package:deldrone_customer/custom_widgets/alerts/platform_exception_alert_dialog.dart';
 import 'package:deldrone_customer/custom_widgets/animation/FadeAnimation.dart';
-import 'package:deldrone_customer/custom_widgets/alerts/back_pressed.dart';
-import 'package:deldrone_customer/services/auth.dart';
-import 'package:deldrone_customer/ui/Pages/home_page.dart';
+import 'package:deldrone_customer/custom_widgets/screen_navigation.dart';
+import 'package:deldrone_customer/providers/auth.dart';
+import 'package:deldrone_customer/ui/screens/main_screen.dart';
+import 'package:deldrone_customer/ui/screens/registration_screen.dart';
+import 'package:deldrone_customer/ui/sign_in/social_sign_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:deldrone_customer/ui/sign_in/validators.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:deldrone_customer/custom_widgets/alerts/back_pressed.dart';
 
-class SignupPage extends StatefulWidget with EmailAndPasswordValidators {
+class LoginScreen extends StatefulWidget with EmailAndPasswordValidators {
   @override
-  _SignupPageState createState() => _SignupPageState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _LoginScreenState extends State<LoginScreen> {
   bool _toggleVisibility = true;
+  final _key = GlobalKey<ScaffoldState>();
 
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 
-  String get _email => _emailController.text;
-  String get _password => _passwordController.text;
-
   bool _submitted = false;
-  bool _isLoading2 = false;
+
+  void _showSignInError(BuildContext context, PlatformException exception) {
+    PlatformExceptionAlertDialog(
+      title: 'Sign in failed',
+      exception: exception,
+    ).show(context);
+  }
+
+  Future<void> _signInWithGoogle(BuildContext context) async {
+    try {
+      final auth = Provider.of<AuthProvider>(context);
+      if (!await auth.signInWithGoogle(context)) {
+        _key.currentState
+            .showSnackBar(SnackBar(content: Text("Login failed!")));
+        return;
+      }
+      auth.clearController();
+      changeScreenReplacement(context, MainScreen());
+    } on PlatformException catch (e) {
+      if (e.code != 'ERROR_ABORTED_BY_USER') {
+        _showSignInError(context, e);
+      }
+    }
+  }
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
     super.dispose();
   }
 
   void _emailEditingComplete() {
-    final newFocus = widget.emailValidator.isValid(_email)
+    final authProvider = Provider.of<AuthProvider>(context);
+    final newFocus = widget.emailValidator.isValid(authProvider.email.text)
         ? _passwordFocusNode
         : _emailFocusNode;
     FocusScope.of(context).requestFocus(newFocus);
   }
 
   void _submit() async {
-    setState(() {
-      _submitted = true;
-      _isLoading2 = true;
-    });
-    try {
-      showLoadingIndicator(context, "Signing Up....");
-      final auth = Provider.of<AuthBase>(context);
-      await auth.createUserWithEmailAndPassword(_email, _password);
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-    } on PlatformException catch (e) {
-      PlatformExceptionAlertDialog(
-        title: 'Sign in failed',
-        exception: e,
-      ).show(context);
-    } finally {
-      setState(() {
-        _isLoading2 = false;
-      });
+    setState(() => _submitted = true);
+    final authProvider = Provider.of<AuthProvider>(context);
+    if (!await authProvider.signIn(context)) {
+      _key.currentState.showSnackBar(SnackBar(content: Text("Login failed!")));
+      return;
     }
+    authProvider.clearController();
+    changeScreenReplacement(context, MainScreen());
   }
 
   @override
@@ -72,6 +80,7 @@ class _SignupPageState extends State<SignupPage> {
     return WillPopScope(
       onWillPop: () => onBackPressed(context),
       child: Scaffold(
+        key: _key,
         body: SingleChildScrollView(
           child: Container(
             height: MediaQuery.of(context).size.height,
@@ -83,12 +92,12 @@ class _SignupPageState extends State<SignupPage> {
                 Column(
                   children: <Widget>[
                     SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
                     FadeAnimation(
                         1,
                         Text(
-                          "Sign Up",
+                          "Login",
                           style: TextStyle(
                               fontSize: 30, fontWeight: FontWeight.bold),
                         )),
@@ -98,7 +107,7 @@ class _SignupPageState extends State<SignupPage> {
                     FadeAnimation(
                         1,
                         Text(
-                          "Create an account, It's free",
+                          "Login to your account",
                           style:
                               TextStyle(fontSize: 15, color: Colors.grey[700]),
                         )),
@@ -122,9 +131,6 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
                     FadeAnimation(
                         1.2,
                         Padding(
@@ -133,12 +139,7 @@ class _SignupPageState extends State<SignupPage> {
                             padding: EdgeInsets.only(top: 2, left: 3),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
-                                border: Border(
-                                  bottom: BorderSide(color: Colors.black),
-                                  top: BorderSide(color: Colors.black),
-                                  left: BorderSide(color: Colors.black),
-                                  right: BorderSide(color: Colors.black),
-                                )),
+                                border: Border.all(color: Colors.black)),
                             child: MaterialButton(
                               minWidth: double.infinity,
                               height: 60,
@@ -148,7 +149,7 @@ class _SignupPageState extends State<SignupPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50)),
                               child: Text(
-                                "Sign Up",
+                                "Login",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600, fontSize: 18),
                               ),
@@ -156,15 +157,47 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         )),
                     SizedBox(
+                      height: 15,
+                    ),
+                    FadeAnimation(
+                      1.3,
+                      Center(
+                        child: Text(
+                          'OR',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Circular',
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    FadeAnimation(
+                      1.3,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SocialSignInButton(
+                          assetName: 'assets/images/google-logo.png',
+                          text: 'Sign in with Google',
+                          textColor: Colors.black87,
+                          color: Colors.grey[100],
+                          onPressed: () => _signInWithGoogle(context),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
                       height: 30,
                     ),
                     FadeAnimation(
-                        1.3,
+                        1.4,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              "Already have an account?",
+                              "Don't have an account?",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -175,18 +208,15 @@ class _SignupPageState extends State<SignupPage> {
                               width: 20,
                             ),
                             GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                                _emailController.clear();
-                                _passwordController.clear();
-                              },
+                              onTap: () => changeScreenReplacement(
+                                  context, SignupScreen()),
                               child: Container(
                                   decoration: BoxDecoration(
                                       color: Colors.green[300],
                                       borderRadius: BorderRadius.circular(15)),
                                   padding: EdgeInsets.all(10),
                                   child: Text(
-                                    'Login',
+                                    'Sign Up',
                                     style: TextStyle(
                                         fontSize: 16,
                                         color: Colors.white,
@@ -214,9 +244,11 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   TextField _buildEmailTextField() {
-    bool showErrorText = _submitted && !widget.emailValidator.isValid(_email);
+    final authProvider = Provider.of<AuthProvider>(context);
+    bool showErrorText =
+        _submitted && !widget.emailValidator.isValid(authProvider.email.text);
     return TextField(
-      controller: _emailController,
+      controller: authProvider.email,
       focusNode: _emailFocusNode,
       decoration: InputDecoration(
           labelText: 'Email',
@@ -225,8 +257,8 @@ class _SignupPageState extends State<SignupPage> {
             fontWeight: FontWeight.w600,
           ),
           hintText: 'test@test.com',
-          errorText: showErrorText ? widget.invalidEmailErrorText : null,
-          enabled: _isLoading2 == false),
+          icon: Icon(Icons.email),
+          errorText: showErrorText ? widget.invalidEmailErrorText : null),
       autocorrect: false,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
@@ -236,10 +268,11 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   TextField _buildPasswordTextField() {
-    bool showErrorText =
-        _submitted && !widget.passwordValidator.isValid(_password);
+    final authProvider = Provider.of<AuthProvider>(context);
+    bool showErrorText = _submitted &&
+        !widget.passwordValidator.isValid(authProvider.password.text);
     return TextField(
-      controller: _passwordController,
+      controller: authProvider.password,
       focusNode: _passwordFocusNode,
       decoration: InputDecoration(
           labelText: 'Password',
@@ -247,6 +280,7 @@ class _SignupPageState extends State<SignupPage> {
             fontSize: 20.0,
             fontWeight: FontWeight.w600,
           ),
+          icon: Icon(Icons.lock),
           suffixIcon: IconButton(
             icon: _toggleVisibility
                 ? Icon(Icons.visibility_off)
@@ -257,8 +291,7 @@ class _SignupPageState extends State<SignupPage> {
               });
             },
           ),
-          errorText: showErrorText ? widget.invalidPasswordErrorText : null,
-          enabled: _isLoading2 == false),
+          errorText: showErrorText ? widget.invalidPasswordErrorText : null),
       obscureText: _toggleVisibility,
       textInputAction: TextInputAction.done,
       onChanged: (password) => _updateState(),

@@ -1,6 +1,7 @@
 import 'package:deldrone_customer/custom_widgets/animation/FadeAnimation.dart';
-import 'package:deldrone_customer/ui/sign_in/login_page.dart';
-import 'package:deldrone_customer/ui/sign_in/signup_page.dart';
+import 'package:deldrone_customer/custom_widgets/screen_navigation.dart';
+import 'package:deldrone_customer/ui/screens/login_screen.dart';
+import 'package:deldrone_customer/ui/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatelessWidget {
@@ -63,12 +64,8 @@ class SignInPage extends StatelessWidget {
                           MaterialButton(
                             minWidth: double.infinity,
                             height: 60,
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()));
-                            },
+                            onPressed: () =>
+                                changeScreenReplacement(context, LoginScreen()),
                             shape: RoundedRectangleBorder(
                                 side: BorderSide(color: Colors.black),
                                 borderRadius: BorderRadius.circular(50)),
@@ -98,12 +95,8 @@ class SignInPage extends StatelessWidget {
                             child: MaterialButton(
                               minWidth: double.infinity,
                               height: 60,
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignupPage()));
-                              },
+                              onPressed: () => changeScreenReplacement(
+                                  context, SignupScreen()),
                               color: Colors.yellow,
                               elevation: 0,
                               shape: RoundedRectangleBorder(
