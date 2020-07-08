@@ -1,3 +1,4 @@
+import 'package:deldrone_customer/custom_widgets/background_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:deldrone_customer/custom_widgets/custom_text.dart';
 import 'package:deldrone_customer/custom_widgets/alerts/back_pressed.dart';
@@ -15,9 +16,7 @@ class _ExplorePageState extends State<ExplorePage> {
       child: Scaffold(
         body: Stack(
           children: <Widget>[
-            Center(
-                child: Opacity(
-                    opacity: 0.6, child: Image.asset('assets/images/bg.png'))),
+            BackgroundWidget(),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
               child: Column(

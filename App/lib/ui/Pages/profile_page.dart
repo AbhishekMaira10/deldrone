@@ -1,7 +1,9 @@
 import 'package:deldrone_customer/custom_widgets/alerts/platform_alert_dialog.dart';
 import 'package:deldrone_customer/custom_widgets/alerts/back_pressed.dart';
+import 'package:deldrone_customer/custom_widgets/background_widget.dart';
 import 'package:deldrone_customer/custom_widgets/buttons/small_button.dart';
 import 'package:deldrone_customer/custom_widgets/custom_list_tile.dart';
+import 'package:deldrone_customer/custom_widgets/custom_text.dart';
 import 'package:deldrone_customer/providers/auth.dart';
 import 'package:deldrone_customer/ui/sign_in/sign_in_page.dart';
 import 'package:flutter/material.dart';
@@ -41,65 +43,38 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
     return WillPopScope(
       onWillPop: () => onBackPressed(context),
       child: Scaffold(
         body: Stack(
           children: <Widget>[
-            Center(
-                child: Opacity(
-                    opacity: 0.6, child: Image.asset('assets/images/bg.png'))),
+            BackgroundWidget(),
             SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(height: 25.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "Profile",
-                          style: TextStyle(
-                            fontSize: 32.0,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Ubuntu',
-                          ),
-                        ),
-                        SmallButton(
-                          btnText: 'Logout',
-                          onPressed: () => _confirmSignOut(context),
-                          borderRadius: 20.0,
-                          color: Colors.redAccent,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                    SizedBox(height: 50.0),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                          height: 120.0,
-                          width: 120.0,
+                          height: 105.0,
+                          width: 105.0,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(60.0),
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 3.0,
-                                  offset: Offset(0, 4.0),
-                                  color: Colors.black38),
-                            ],
-                            image: DecorationImage(
-                              image: AssetImage(
-                                "assets/images/default_pic.png",
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                              borderRadius: BorderRadius.circular(50.0),
+                              image: DecorationImage(
+                                image: authProvider.user.photoUrl != null
+                                    ? NetworkImage(
+                                        '${authProvider.user.photoUrl}')
+                                    : AssetImage(
+                                        "assets/images/default_pic.png",
+                                      ),
+                                fit: BoxFit.cover,
+                              )),
                         ),
                         SizedBox(
                           width: 20.0,
@@ -107,27 +82,34 @@ class _ProfilePageState extends State<ProfilePage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              "Abhishek Maira",
-                              style: TextStyle(
-                                fontSize: 16.0,
-                              ),
+                            CustomText(
+                              text: authProvider.userModel?.name ??
+                                  "Username loading...",
+                              size: 20.0,
+                              weight: FontWeight.bold,
+                              family: 'Circular',
+                            ),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            CustomText(
+                              text: authProvider.userModel?.email ??
+                                  "Email loading...",
+                              size: 17.0,
+                              family: 'Ubuntu',
                             ),
                             SizedBox(
                               height: 10.0,
                             ),
-                            Text(
-                              "+91 - 9603755263",
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            SmallButton(
-                              btnText: 'Edit',
-                              onPressed: () {},
-                              borderRadius: 10.0,
-                              color: Colors.blue,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 70.0),
+                              child: SmallButton(
+                                btnText: 'Logout',
+                                onPressed: () => _confirmSignOut(context),
+                                borderRadius: 20.0,
+                                color: Colors.redAccent,
+                              ),
                             ),
                           ],
                         ),

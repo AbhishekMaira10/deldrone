@@ -62,22 +62,34 @@ class _OrderPageState extends State<OrderPage> {
           )
         ],
       ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 10.0),
-        scrollDirection: Axis.vertical,
+      body: Stack(
         children: <Widget>[
-          OrderCard(
-              name: 'Grilled Chicken',
-              price: 150.0,
-              image: 'assets/images/lunch.jpeg'),
-          OrderCard(
-              name: 'Chicken Burger',
-              price: 85.0,
-              image: 'assets/images/chicken-burger.jpg'),
-          OrderCard(
-              name: 'Veg Wrap',
-              price: 65.0,
-              image: 'assets/images/veg_Wrap.jpg'),
+          Opacity(
+              opacity: 0.6,
+              child: Image.asset(
+                'assets/images/bg.png',
+                width: MediaQuery.of(context).size.width * 2,
+                height: MediaQuery.of(context).size.height,
+                fit: BoxFit.fitWidth,
+              )),
+          ListView(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            scrollDirection: Axis.vertical,
+            children: <Widget>[
+              OrderCard(
+                  name: 'Grilled Chicken',
+                  price: 150.0,
+                  image: 'assets/images/lunch.jpeg'),
+              OrderCard(
+                  name: 'Chicken Burger',
+                  price: 85.0,
+                  image: 'assets/images/chicken-burger.jpg'),
+              OrderCard(
+                  name: 'Veg Wrap',
+                  price: 65.0,
+                  image: 'assets/images/veg_Wrap.jpg'),
+            ],
+          ),
         ],
       ),
       bottomNavigationBar: _buildTotalContainer(),

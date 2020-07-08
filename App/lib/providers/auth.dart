@@ -53,7 +53,7 @@ class AuthProvider with ChangeNotifier {
       _status = Status.Unauthenticated;
       notifyListeners();
       PlatformExceptionAlertDialog(
-        title: 'Registration Failed',
+        title: 'Login Failed',
         exception: e,
       ).show(context);
       return false;
@@ -76,7 +76,7 @@ class AuthProvider with ChangeNotifier {
       _status = Status.Unauthenticated;
       notifyListeners();
       PlatformExceptionAlertDialog(
-        title: 'Sign in failed',
+        title: 'Sign up failed',
         exception: e,
       ).show(context);
       return false;

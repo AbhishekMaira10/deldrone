@@ -1,6 +1,6 @@
-import 'package:deldrone_customer/custom_widgets/alerts/loading_indicator.dart';
 import 'package:deldrone_customer/custom_widgets/animation/FadeAnimation.dart';
 import 'package:deldrone_customer/custom_widgets/alerts/back_pressed.dart';
+import 'package:deldrone_customer/custom_widgets/background_widget.dart';
 import 'package:deldrone_customer/custom_widgets/screen_navigation.dart';
 import 'package:deldrone_customer/providers/auth.dart';
 import 'package:deldrone_customer/ui/screens/login_screen.dart';
@@ -59,144 +59,130 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context);
     return WillPopScope(
       onWillPop: () => onBackPressed(context),
       child: Scaffold(
         key: _key,
-        body: authProvider.status == Status.Authenticating
-            ? ShowLoadingIndicator(message: "Signing Up....")
-            : SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: double.infinity,
-                  child: Stack(
-                    children: <Widget>[
-                      Opacity(
-                          opacity: 0.5,
-                          child: Image.asset('assets/images/bg.png')),
-                      Column(
+        body: SingleChildScrollView(
+          child: Stack(
+            children: <Widget>[
+              BackgroundWidget(),
+              Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 50,
+                  ),
+                  FadeAnimation(
+                      1,
+                      Text(
+                        "Sign Up",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      )),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  FadeAnimation(
+                      1,
+                      Text(
+                        "Create an account, It's free",
+                        style: TextStyle(fontSize: 15, color: Colors.grey[700]),
+                      )),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  FadeAnimation(
+                    1.1,
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Card(
+                        elevation: 10.0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisSize: MainAxisSize.min,
+                            children: _buildChildren(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  FadeAnimation(
+                      1.2,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        child: Container(
+                          padding: EdgeInsets.only(top: 2, left: 3),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border(
+                                bottom: BorderSide(color: Colors.black),
+                                top: BorderSide(color: Colors.black),
+                                left: BorderSide(color: Colors.black),
+                                right: BorderSide(color: Colors.black),
+                              )),
+                          child: MaterialButton(
+                            minWidth: double.infinity,
+                            height: 60,
+                            onPressed: _submit,
+                            color: Colors.greenAccent,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            child: Text(
+                              "Sign Up",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 18),
+                            ),
+                          ),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  FadeAnimation(
+                      1.3,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          SizedBox(
-                            height: 50,
-                          ),
-                          FadeAnimation(
-                              1,
-                              Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.bold),
-                              )),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          FadeAnimation(
-                              1,
-                              Text(
-                                "Create an account, It's free",
-                                style: TextStyle(
-                                    fontSize: 15, color: Colors.grey[700]),
-                              )),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          FadeAnimation(
-                            1.1,
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Card(
-                                elevation: 10.0,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: _buildChildren(),
-                                  ),
-                                ),
-                              ),
+                          Text(
+                            "Already have an account?",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Circular',
                             ),
                           ),
                           SizedBox(
-                            height: 20,
+                            width: 20,
                           ),
-                          FadeAnimation(
-                              1.2,
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 40),
-                                child: Container(
-                                  padding: EdgeInsets.only(top: 2, left: 3),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      border: Border(
-                                        bottom: BorderSide(color: Colors.black),
-                                        top: BorderSide(color: Colors.black),
-                                        left: BorderSide(color: Colors.black),
-                                        right: BorderSide(color: Colors.black),
-                                      )),
-                                  child: MaterialButton(
-                                    minWidth: double.infinity,
-                                    height: 60,
-                                    onPressed: _submit,
-                                    color: Colors.greenAccent,
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(50)),
-                                    child: Text(
-                                      "Sign Up",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                                ),
-                              )),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          FadeAnimation(
-                              1.3,
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    "Already have an account?",
-                                    style: TextStyle(
+                          GestureDetector(
+                            onTap: () =>
+                                changeScreenReplacement(context, LoginScreen()),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.green[300],
+                                    borderRadius: BorderRadius.circular(15)),
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  'Login',
+                                  style: TextStyle(
                                       fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Circular',
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () => changeScreenReplacement(
-                                        context, LoginScreen()),
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.green[300],
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        padding: EdgeInsets.all(10),
-                                        child: Text(
-                                          'Login',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        )),
-                                  ),
-                                ],
-                              )),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ),
                         ],
-                      ),
-                    ],
-                  ),
-                ),
+                      )),
+                ],
               ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -204,10 +190,13 @@ class _SignupScreenState extends State<SignupScreen> {
   List<Widget> _buildChildren() {
     return [
       _buildUsernameTextField(),
-      SizedBox(height: 8.0),
+      SizedBox(height: 10.0),
       _buildEmailTextField(),
-      SizedBox(height: 8.0),
+      SizedBox(height: 10.0),
       _buildPasswordTextField(),
+      SizedBox(
+        height: 20,
+      ),
     ];
   }
 

@@ -1,5 +1,6 @@
 import 'package:deldrone_customer/custom_widgets/alerts/platform_exception_alert_dialog.dart';
 import 'package:deldrone_customer/custom_widgets/animation/FadeAnimation.dart';
+import 'package:deldrone_customer/custom_widgets/background_widget.dart';
 import 'package:deldrone_customer/custom_widgets/screen_navigation.dart';
 import 'package:deldrone_customer/providers/auth.dart';
 import 'package:deldrone_customer/ui/screens/main_screen.dart';
@@ -82,14 +83,12 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         key: _key,
         body: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: double.infinity,
-            child: Stack(
-              children: <Widget>[
-                Opacity(
-                    opacity: 0.5, child: Image.asset('assets/images/bg.png')),
-                Column(
+          child: Stack(
+            children: <Widget>[
+              BackgroundWidget(),
+              Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: Column(
                   children: <Widget>[
                     SizedBox(
                       height: 30,
@@ -130,6 +129,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 30,
                     ),
                     FadeAnimation(
                         1.2,
@@ -227,8 +229,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         )),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -238,8 +240,9 @@ class _LoginScreenState extends State<LoginScreen> {
   List<Widget> _buildChildren() {
     return [
       _buildEmailTextField(),
-      SizedBox(height: 8.0),
+      SizedBox(height: 10.0),
       _buildPasswordTextField(),
+      SizedBox(height: 10.0),
     ];
   }
 

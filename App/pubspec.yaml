@@ -23,6 +23,7 @@ dependencies:
   firebase_auth: ^0.14.0+5
   google_sign_in: ^4.0.7
   provider: ^3.1.0+1
+  circular_profile_avatar: ^1.0.6
 
   cloud_firestore: ^0.13.7
 
