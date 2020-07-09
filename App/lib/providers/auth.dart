@@ -68,8 +68,13 @@ class AuthProvider with ChangeNotifier {
           .createUserWithEmailAndPassword(
               email: email.text.trim(), password: password.text.trim())
           .then((result) {
-        _firestore.collection('users').document(result.user.uid).setData(
-            {'name': name.text, 'email': email.text, 'uid': result.user.uid});
+        _firestore.collection('users').document(result.user.uid).setData({
+          'name': name.text,
+          'email': email.text,
+          'uid': result.user.uid,
+          "likedFood": [],
+          "likedRestaurants": [],
+        });
       });
       return true;
     } catch (e) {

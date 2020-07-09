@@ -134,9 +134,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: EdgeInsets.all(16.0),
                         child: Column(
                           children: <Widget>[
-                            CustomListTile(
-                              icon: Icons.location_on,
-                              text: "Location",
+                            ExpansionTile(
+                              title: CustomText(
+                                text: 'Location',
+                              ),
                             ),
                             Divider(
                               height: 10.0,

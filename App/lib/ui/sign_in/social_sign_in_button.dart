@@ -16,7 +16,7 @@ class SocialSignInButton extends CustomRaisedButton {
               Image.asset(assetName, height: 100.0, width: 100.0),
               Text(
                 text,
-                style: TextStyle(color: textColor, fontSize: 15.0),
+                style: TextStyle(color: textColor, fontSize: 16.0),
               ),
             ],
           ),

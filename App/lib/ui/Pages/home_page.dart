@@ -27,9 +27,9 @@ class _HomePageState extends State<HomePage> {
           title: CustomText(
             text: "DelDrone",
             color: Colors.white,
-            size: 20.0,
+            size: 30.0,
             weight: FontWeight.bold,
-            family: 'Ubuntu',
+            family: 'Circular',
           ),
           actions: <Widget>[
             IconButton(

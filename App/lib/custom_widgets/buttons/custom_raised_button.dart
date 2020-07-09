@@ -19,6 +19,7 @@ class CustomRaisedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
+      width: 300.0,
       child: RaisedButton(
         child: childs,
         color: color,
