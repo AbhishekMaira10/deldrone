@@ -8,7 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
-class AuthProvider with ChangeNotifier {
+class UserProvider with ChangeNotifier {
   FirebaseAuth _auth;
   FirebaseUser _user;
   Status _status = Status.Uninitialized;
@@ -27,7 +27,7 @@ class AuthProvider with ChangeNotifier {
   TextEditingController password = TextEditingController();
   TextEditingController name = TextEditingController();
 
-  AuthProvider.initialize() : _auth = FirebaseAuth.instance {
+  UserProvider.initialize() : _auth = FirebaseAuth.instance {
     _auth.onAuthStateChanged.listen(_onStateChanged);
   }
 

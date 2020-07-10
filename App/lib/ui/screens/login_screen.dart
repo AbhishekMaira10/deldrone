@@ -2,7 +2,7 @@ import 'package:deldrone_customer/custom_widgets/alerts/platform_exception_alert
 import 'package:deldrone_customer/custom_widgets/animation/FadeAnimation.dart';
 import 'package:deldrone_customer/custom_widgets/background_widget.dart';
 import 'package:deldrone_customer/custom_widgets/screen_navigation.dart';
-import 'package:deldrone_customer/providers/auth.dart';
+import 'package:deldrone_customer/providers/user_provider.dart';
 import 'package:deldrone_customer/ui/screens/main_screen.dart';
 import 'package:deldrone_customer/ui/screens/registration_screen.dart';
 import 'package:deldrone_customer/ui/sign_in/social_sign_in_button.dart';
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
-      final auth = Provider.of<AuthProvider>(context);
+      final auth = Provider.of<UserProvider>(context);
       if (!await auth.signInWithGoogle(context)) {
         _key.currentState
             .showSnackBar(SnackBar(content: Text("Login failed!")));
@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _emailEditingComplete() {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
     final newFocus = widget.emailValidator.isValid(authProvider.email.text)
         ? _passwordFocusNode
         : _emailFocusNode;
@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _submit() async {
     setState(() => _submitted = true);
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
     if (!await authProvider.signIn(context)) {
       _key.currentState.showSnackBar(SnackBar(content: Text("Login failed!")));
       return;
@@ -247,7 +247,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   TextField _buildEmailTextField() {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
     bool showErrorText =
         _submitted && !widget.emailValidator.isValid(authProvider.email.text);
     return TextField(
@@ -271,7 +271,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   TextField _buildPasswordTextField() {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
     bool showErrorText = _submitted &&
         !widget.passwordValidator.isValid(authProvider.password.text);
     return TextField(

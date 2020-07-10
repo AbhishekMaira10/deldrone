@@ -2,10 +2,12 @@ import 'package:deldrone_customer/custom_widgets/background_widget.dart';
 import 'package:deldrone_customer/custom_widgets/custom_text.dart';
 import 'package:deldrone_customer/custom_widgets/alerts/back_pressed.dart';
 import 'package:deldrone_customer/custom_widgets/ui_widgets/bought_food.dart';
-import 'package:deldrone_customer/custom_widgets/ui_widgets/food_category.dart';
+import 'package:deldrone_customer/custom_widgets/ui_widgets/categories.dart';
 import 'package:deldrone_customer/data/food_data.dart';
+import 'package:deldrone_customer/providers/category_provider.dart';
 import 'package:deldrone_customer/ui/Pages/explore_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,6 +19,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final categoryProvider = Provider.of<CategoryProvider>(context);
+
     return WillPopScope(
       child: Scaffold(
         appBar: AppBar(
@@ -113,7 +117,16 @@ class _HomePageState extends State<HomePage> {
                         weight: FontWeight.bold),
                   ),
                   SizedBox(height: 10),
-                  FoodCategory(),
+                  Container(
+                    height: 100,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: categoryProvider.categories.length,
+                        itemBuilder: (context, index) {
+                          return CategoryWidget(
+                              category: categoryProvider.categories[index]);
+                        }),
+                  ),
                   SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

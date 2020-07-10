@@ -24,6 +24,8 @@ dependencies:
   google_sign_in: ^4.0.7
   provider: ^3.1.0+1
   carousel_pro: ^1.0.0
+  transparent_image: ^1.0.0
+  flutter_spinkit: ^4.1.2+1
 
   cloud_firestore: ^0.13.7
 

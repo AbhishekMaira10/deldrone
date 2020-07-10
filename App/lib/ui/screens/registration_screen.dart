@@ -2,7 +2,7 @@ import 'package:deldrone_customer/custom_widgets/animation/FadeAnimation.dart';
 import 'package:deldrone_customer/custom_widgets/alerts/back_pressed.dart';
 import 'package:deldrone_customer/custom_widgets/background_widget.dart';
 import 'package:deldrone_customer/custom_widgets/screen_navigation.dart';
-import 'package:deldrone_customer/providers/auth.dart';
+import 'package:deldrone_customer/providers/user_provider.dart';
 import 'package:deldrone_customer/ui/screens/login_screen.dart';
 import 'package:deldrone_customer/ui/screens/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void _emailEditingComplete() {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
     final newFocus = widget.emailValidator.isValid(authProvider.email.text)
         ? _passwordFocusNode
         : _emailFocusNode;
@@ -47,7 +47,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void _submit() async {
     setState(() => _submitted = true);
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
     if (!await authProvider.signUp(context)) {
       _key.currentState
           .showSnackBar(SnackBar(content: Text("Resgistration failed!")));
@@ -201,7 +201,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   TextField _buildUsernameTextField() {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
     bool showErrorText =
         _submitted && !widget.emailValidator.isValid(authProvider.name.text);
     return TextField(
@@ -224,7 +224,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   TextField _buildEmailTextField() {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
     bool showErrorText =
         _submitted && !widget.emailValidator.isValid(authProvider.email.text);
     return TextField(
@@ -248,7 +248,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   TextField _buildPasswordTextField() {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
     bool showErrorText = _submitted &&
         !widget.passwordValidator.isValid(authProvider.password.text);
     return TextField(

@@ -1,4 +1,5 @@
-import 'package:deldrone_customer/providers/auth.dart';
+import 'package:deldrone_customer/providers/category_provider.dart';
+import 'package:deldrone_customer/providers/user_provider.dart';
 import 'package:deldrone_customer/ui/screens/main_screen.dart';
 import 'package:deldrone_customer/ui/sign_in/sign_in_page.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: AuthProvider.initialize())
+        ChangeNotifierProvider.value(value: UserProvider.initialize()),
+        ChangeNotifierProvider.value(value: CategoryProvider.initialize()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -24,7 +26,7 @@ void main() {
 class ScreensController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<AuthProvider>(context);
+    final auth = Provider.of<UserProvider>(context);
     switch (auth.status) {
       case Status.Unauthenticated:
       case Status.Authenticating:
