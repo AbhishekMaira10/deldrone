@@ -1,4 +1,5 @@
 import 'package:deldrone_customer/providers/category_provider.dart';
+import 'package:deldrone_customer/providers/restaurant_provider.dart';
 import 'package:deldrone_customer/providers/user_provider.dart';
 import 'package:deldrone_customer/ui/screens/main_screen.dart';
 import 'package:deldrone_customer/ui/sign_in/sign_in_page.dart';
@@ -12,6 +13,7 @@ void main() {
       providers: [
         ChangeNotifierProvider.value(value: UserProvider.initialize()),
         ChangeNotifierProvider.value(value: CategoryProvider.initialize()),
+        ChangeNotifierProvider.value(value: RestaurantProvider.initialize()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

@@ -12,8 +12,8 @@ class RestaurantModel {
   int _id;
   String _name;
   String _image;
-  double _rating;
-  double _avgPrice;
+  dynamic _rating;
+  int _avgPrice;
   bool _popular;
   int _rates;
 
@@ -21,8 +21,8 @@ class RestaurantModel {
   int get id => _id;
   String get name => _name;
   String get image => _image;
-  double get avgPrice => _avgPrice;
-  double get rating => _rating;
+  int get avgPrice => _avgPrice;
+  dynamic get rating => _rating;
   bool get popular => _popular;
   int get rates => _rates;
 

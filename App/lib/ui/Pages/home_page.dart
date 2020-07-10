@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Column(
                     children: _foods.map(_buildFoodItems).toList(),
-                  )
+                  ),
                 ],
               ),
             ],
