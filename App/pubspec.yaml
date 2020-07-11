@@ -26,6 +26,9 @@ dependencies:
   carousel_pro: ^1.0.0
   transparent_image: ^1.0.0
   flutter_spinkit: ^4.1.2+1
+  showcaseview: ^0.1.5
+  sticky_headers: ^0.1.8
+  shared_preferences: ^0.5.8
 
   cloud_firestore: ^0.13.7
 
