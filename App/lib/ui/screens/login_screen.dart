@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: <Widget>[
                     SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     FadeAnimation(
                         1,
@@ -111,12 +111,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               TextStyle(fontSize: 15, color: Colors.grey[700]),
                         )),
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     FadeAnimation(
                       1.1,
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: Card(
                           elevation: 10.0,
                           child: Padding(
@@ -131,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     FadeAnimation(
                         1.2,
@@ -159,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         )),
                     SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     FadeAnimation(
                       1.3,
@@ -175,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     FadeAnimation(
                       1.3,
@@ -191,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 15,
                     ),
                     FadeAnimation(
                         1.4,
@@ -227,6 +227,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         )),
+                    SizedBox(
+                      width: 30,
+                    ),
                   ],
                 ),
               ),

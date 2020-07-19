@@ -70,12 +70,12 @@ class _HomeState extends State<Home> {
               backgroundColor: Color(0XFF32CD32),
               pinned: true,
               floating: true,
-              expandedHeight: 110.0,
+              expandedHeight: 80.0,
               flexibleSpace: FlexibleSpaceBar(
                 title: CustomText(
                   text: "DelDrone",
                   color: Colors.white,
-                  size: 25.0,
+                  size: 22.0,
                   weight: FontWeight.bold,
                   family: 'Circular',
                 ),

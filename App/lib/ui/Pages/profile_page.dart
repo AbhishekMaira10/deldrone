@@ -101,15 +101,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             SizedBox(
                               height: 10.0,
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 70.0),
-                              child: SmallButton(
-                                btnText: 'Logout',
-                                onPressed: () => _confirmSignOut(context),
-                                borderRadius: 20.0,
-                                color: Colors.redAccent,
-                              ),
+                            SmallButton(
+                              btnText: 'Logout',
+                              onPressed: () => _confirmSignOut(context),
+                              borderRadius: 20.0,
+                              color: Colors.redAccent,
                             ),
                           ],
                         ),

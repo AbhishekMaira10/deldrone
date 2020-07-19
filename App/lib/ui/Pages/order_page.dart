@@ -98,7 +98,7 @@ class _OrderPageState extends State<OrderPage> {
 
   Widget _buildTotalContainer() {
     return Container(
-      height: 220.0,
+      height: 205.0,
       color: Colors.grey[100],
       padding: EdgeInsets.all(10.0),
       child: Column(
@@ -122,7 +122,7 @@ class _OrderPageState extends State<OrderPage> {
             ],
           ),
           SizedBox(
-            height: 20.0,
+            height: 15.0,
           ),
           Divider(
             height: 2.0,
@@ -149,7 +149,7 @@ class _OrderPageState extends State<OrderPage> {
             ],
           ),
           SizedBox(
-            height: 20.0,
+            height: 15.0,
           ),
           Divider(
             height: 2.0,
@@ -176,7 +176,7 @@ class _OrderPageState extends State<OrderPage> {
             ],
           ),
           SizedBox(
-            height: 20.0,
+            height: 15.0,
           ),
           CustomRaisedButton(
             borderRadius: 35,

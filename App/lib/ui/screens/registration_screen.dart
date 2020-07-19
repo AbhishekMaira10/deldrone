@@ -70,7 +70,7 @@ class _SignupScreenState extends State<SignupScreen> {
               Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 50,
+                    height: 25,
                   ),
                   FadeAnimation(
                       1,
@@ -89,12 +89,12 @@ class _SignupScreenState extends State<SignupScreen> {
                         style: TextStyle(fontSize: 15, color: Colors.grey[700]),
                       )),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   FadeAnimation(
                     1.1,
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: Card(
                         elevation: 10.0,
                         child: Padding(
@@ -142,7 +142,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       )),
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   FadeAnimation(
                       1.3,
