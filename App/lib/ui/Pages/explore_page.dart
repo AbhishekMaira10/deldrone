@@ -16,24 +16,36 @@ class _ExplorePageState extends State<ExplorePage> {
   Widget build(BuildContext context) {
     final restaurantProvider = Provider.of<RestaurantProvider>(context);
     return WillPopScope(
-      child: SingleChildScrollView(
-        child: Stack(
-          children: <Widget>[
-            BackgroundWidget(),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
-              child: Column(
-                children: <Widget>[
-                  Center(
-                    child: CustomText(
-                      text: 'All Restaurants',
-                      size: 20.0,
-                      weight: FontWeight.bold,
-                      family: 'Circular',
-                    ),
+      child: Stack(
+        children: <Widget>[
+          BackgroundWidget(),
+          CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                backgroundColor: Color(0XFF32CD32),
+                floating: true,
+                snap: true,
+                expandedHeight: 80.0,
+                shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(60),
+                        bottomRight: Radius.circular(60))),
+                flexibleSpace: FlexibleSpaceBar(
+                  title: CustomText(
+                    text: "All Restaurants",
+                    color: Colors.white,
+                    size: 20.0,
+                    weight: FontWeight.bold,
+                    family: 'Circular',
                   ),
-                  SizedBox(height: 15.0),
-                  Column(
+                  centerTitle: true,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 30.0),
+                  child: Column(
                     children: restaurantProvider.restaurants
                         .map((item) => GestureDetector(
                               onTap: () {},
@@ -42,12 +54,12 @@ class _ExplorePageState extends State<ExplorePage> {
                               ),
                             ))
                         .toList(),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ],
       ),
       onWillPop: () => onBackPressed(context),
     );

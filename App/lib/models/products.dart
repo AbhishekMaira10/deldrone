@@ -12,24 +12,21 @@ class ProductModel {
   static const FEATURED = "featured";
   static const RATES = "rates";
 
-  String _id;
+  int _id;
   String _name;
-  String _restaurantId;
+  int _restaurantId;
   String _restaurant;
   String _category;
   String _image;
   double _rating;
   double _price;
   int _rates;
-
   bool _featured;
 
-  String get id => _id;
-
+  int get id => _id;
   String get name => _name;
-
   String get restaurant => _restaurant;
-  String get restaurantId => _restaurantId;
+  int get restaurantId => _restaurantId;
   String get category => _category;
   String get image => _image;
   double get rating => _rating;
